@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://codevastra-backend.onrender.com";
 
 // 🔐 Hardcoded password – yahan jo chaho password rakh lo
 const ADMIN_PASSWORD = "rajendra@admin";
