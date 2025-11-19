@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded bg-orange-500 flex items-center justify-center text-white font-bold">
-            CV
+            IIMT
           </div>
           <div>
             <div className="font-bold text-lg">CodeVastra</div>
