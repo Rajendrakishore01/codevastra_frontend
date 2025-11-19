@@ -3,24 +3,29 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Team from "./pages/Team";
-import Admin from "./pages/Admin";
-import Gallery from "./pages/Gallery";   // <-- ADD THIS
+
+import Gallery from "./pages/Gallery";  
+import Results from "./pages/Results";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-white">
       <Navbar />
-      <div className="max-w-6xl mx-auto px-4 pb-16 pt-6">
+      
+      <div className="max-w-7xl mx-auto px-4 pb-16 pt-6" >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/team" element={<Team />} />
-          <Route path="/admin" element={<Admin />} />
-
+          
+           <Route path="/results" element={<Results />} />
+<Route path="/results/:eventId" element={<Results />} />  
           {/* REQUIRED ROUTE */}
           <Route path="/gallery/:id" element={<Gallery />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }
