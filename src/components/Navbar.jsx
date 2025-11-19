@@ -34,9 +34,7 @@ export default function Navbar() {
           <Link to="/team" className={linkClass("/team")}>
             Team
           </Link>
-          <Link to="/admin" className={linkClass("/admin")}>
-            Admin
-          </Link>
+          
         </div>
       </div>
     </nav>

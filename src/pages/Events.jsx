@@ -28,7 +28,6 @@ export default function Events() {
       level: "Open for all Years",
       poster: "/posters/codewars-stage1.jpg",
     },
-    
   ];
 
   // ---------- RENDER HELPERS ----------
@@ -38,14 +37,16 @@ export default function Events() {
 
     return (
       <article key={event.id} className={base}>
-        {/* Poster (fixed aspect) */}
+        {/* Poster */}
         {event.poster && (
           <div className="w-full aspect-[16/9] overflow-hidden bg-slate-200">
             <img
               src={event.poster}
               alt={event.name}
               className="h-full w-full object-cover cursor-pointer hover:scale-105 transition-transform duration-200"
-              onClick={() => setPosterPreview({ src: event.poster, alt: event.name })}
+              onClick={() =>
+                setPosterPreview({ src: event.poster, alt: event.name })
+              }
             />
           </div>
         )}
@@ -62,9 +63,13 @@ export default function Events() {
             </span>
           </div>
 
-          <p className="text-sm text-slate-700 mt-3 leading-relaxed flex-1">{event.desc}</p>
+          <p className="text-sm text-slate-700 mt-3 leading-relaxed flex-1">
+            {event.desc}
+          </p>
 
           <div className="mt-4 flex items-center justify-between">
+
+            {/* UPCOMING EVENT BUTTONS */}
             {type === "upcoming" && (
               <>
                 <button
@@ -79,17 +84,35 @@ export default function Events() {
                   {event.registrationOpen ? "Register" : "Registration closed"}
                 </button>
 
-                <Link to={`/gallery/${event.id}`} className="text-sm text-orange-600 hover:underline">
+                <Link
+                  to={`/gallery/${event.id}`}
+                  className="text-sm text-orange-600 hover:underline"
+                >
                   View details →
                 </Link>
               </>
             )}
 
+            {/* COMPLETED EVENT BUTTONS */}
             {type === "completed" && (
               <>
-                <Link to={`/gallery/${event.id}`} className="text-sm text-orange-600 hover:underline">
-                  View photos →
-                </Link>
+                <div className="flex gap-4 items-center">
+                  <Link
+                    to={`/gallery/${event.id}`}
+                    className="text-sm text-orange-600 hover:underline"
+                  >
+                    View photos →
+                  </Link>
+
+                  {/* RESULT BUTTON HERE */}
+                  <Link
+                    to={`/results/${event.id}`}
+                    className="text-sm text-blue-600 hover:underline"
+                  >
+                    View result →
+                  </Link>
+                </div>
+
                 <span className="text-xs text-slate-500">{event.date}</span>
               </>
             )}
@@ -113,12 +136,16 @@ export default function Events() {
         <section className="mb-10">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-xl font-bold text-orange-700">Upcoming: Stage 2</h3>
-              <p className="text-sm text-slate-600">Coding Round for shortlisted participants.</p>
+              <h3 className="text-xl font-bold text-orange-700">
+                Upcoming: Stage 2
+              </h3>
+              <p className="text-sm text-slate-600">
+                Coding Round for shortlisted participants.
+              </p>
             </div>
 
             <div className="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-semibold">
-               Registration Closed
+              Registration Closed
             </div>
           </div>
 
@@ -133,11 +160,16 @@ export default function Events() {
         <section className="mb-6">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Completed Events</h3>
-              <p className="text-xs text-slate-600">Past sessions and competitions.</p>
+              <h3 className="text-lg font-semibold text-slate-900">
+                Completed Events
+              </h3>
+              <p className="text-xs text-slate-600">
+                Past sessions and competitions.
+              </p>
             </div>
+
             <span className="px-3 py-1 rounded-full bg-slate-100 text-green-700 text-xs font-semibold">
-               Successfully conducted
+              Successfully conducted
             </span>
           </div>
 
@@ -147,7 +179,7 @@ export default function Events() {
         </section>
       )}
 
-      {/* Poster preview modal (simple) */}
+      {/* Poster preview modal */}
       {posterPreview && (
         <div
           onClick={() => setPosterPreview(null)}
@@ -161,7 +193,7 @@ export default function Events() {
         </div>
       )}
 
-      {/* Registration modal (only if you have the component) */}
+      {/* Registration modal */}
       {typeof RegistrationModal !== "undefined" && (
         <RegistrationModal
           open={!!activeEvent}
