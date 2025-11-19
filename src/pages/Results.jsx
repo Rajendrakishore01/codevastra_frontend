@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-
 export default function Results() {
   const [events, setEvents] = useState([]);
   const { eventId } = useParams();
@@ -74,39 +73,44 @@ export default function Results() {
   };
 
   return (
-    <div>
-      <div className="flex items-start justify-between">
-        <div>
-          <h2 className="text-3xl font-bold text-slate-900">Event Results</h2>
-          <p className="mt-1 text-sm text-slate-600">
-            {eventId ? "Event-specific result" : "All published results"}
-          </p>
+    <div className="min-h-screen flex flex-col">
+      {/* MAIN CONTENT */}
+      <main className="flex-grow">
+        <div className="flex items-start justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-slate-900">Event Results</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              {eventId ? "Event-specific result" : "All published results"}
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-6 space-y-6">
-        {eventId ? (
-          focusedEvent ? (
-            renderEventBlock(focusedEvent)
-          ) : (
-            <div className="rounded-lg border p-6 bg-white text-center text-slate-600">
-              <div className="text-xl font-semibold">Not announced yet</div>
-              <div className="mt-2 text-sm">No published result for this event.</div>
-            </div>
-          )
-        ) : (
-          <>
-            {events.length === 0 && (
+        <div className="mt-6 space-y-6">
+          {eventId ? (
+            focusedEvent ? (
+              renderEventBlock(focusedEvent)
+            ) : (
               <div className="rounded-lg border p-6 bg-white text-center text-slate-600">
-                <div className="text-xl font-semibold">No results announced yet</div>
-                <div className="mt-2 text-sm">Results will appear here after admin publishes them.</div>
+                <div className="text-xl font-semibold">Not announced yet</div>
+                <div className="mt-2 text-sm">No published result for this event.</div>
               </div>
-            )}
+            )
+          ) : (
+            <>
+              {events.length === 0 && (
+                <div className="rounded-lg border p-6 bg-white text-center text-slate-600">
+                  <div className="text-xl font-semibold">No results announced yet</div>
+                  <div className="mt-2 text-sm">Results will appear here after admin publishes them.</div>
+                </div>
+              )}
 
-            {events.map((ev) => renderEventBlock(ev))}
-          </>
-        )}
-      </div>
+              {events.map((ev) => renderEventBlock(ev))}
+            </>
+          )}
+        </div>
+      </main>
+
+      
     </div>
   );
 }
