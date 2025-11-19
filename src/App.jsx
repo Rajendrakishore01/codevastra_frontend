@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Team from "./pages/Team";
 import Admin from "./pages/Admin";
+import Gallery from "./pages/Gallery";   // <-- ADD THIS
 
 export default function App() {
   return (
@@ -15,6 +16,9 @@ export default function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/team" element={<Team />} />
           <Route path="/admin" element={<Admin />} />
+
+          {/* REQUIRED ROUTE */}
+          <Route path="/gallery/:id" element={<Gallery />} />
         </Routes>
       </div>
     </div>
