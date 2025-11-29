@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import RegistrationModal from "../components/RegistrationModal"; // keep if you have it
+import RegistrationModal from "../components/RegistrationModal"; 
 
 export default function Events() {
   const [activeEvent, setActiveEvent] = useState(null);
@@ -84,12 +84,20 @@ export default function Events() {
                   {event.registrationOpen ? "Register" : "Registration closed"}
                 </button>
 
-                <Link
+                 <Link
                   to={`/gallery/${event.id}`}
                   className="text-sm text-orange-600 hover:underline"
                 >
-                  View details →
+                  View photos→
                 </Link>
+
+        <Link
+  to={`/selected/${event.id}`}
+  className="text-sm text-orange-600 hover:underline"
+>
+  View selected student →
+</Link>
+
               </>
             )}
 
