@@ -7,6 +7,7 @@ import Team from "./pages/Team";
 import Gallery from "./pages/Gallery";  
 import Results from "./pages/Results";
 import Footer from "./components/Footer";
+import SelectedStudents from "./pages/SelectedStudents";
 
 export default function App() {
   return (
@@ -23,6 +24,8 @@ export default function App() {
 <Route path="/results/:eventId" element={<Results />} />  
           {/* REQUIRED ROUTE */}
           <Route path="/gallery/:id" element={<Gallery />} />
+          <Route path="/selected/:eventId" element={<SelectedStudents />} />
+<Route path="/selected" element={<SelectedStudents />} />
         </Routes>
       </div>
       <Footer />

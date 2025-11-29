@@ -221,14 +221,10 @@ export default function Results() {
       return (
         <div className="min-h-screen p-6">
           <div className="mt-6 rounded-lg border p-6 bg-white">
-            <h3 className="text-xl font-semibold">No published result for this event</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              The URL has <span className="font-semibold">eventId = "{eventId}"</span> but no matching
-              event was found.
-            </p>
+           
 
             <div className="mt-4 text-sm">
-              <div className="text-slate-500">Available event ids (click to open):</div>
+              <div className="text-slate-500"> click to open:</div>
               <ul className="mt-2 list-disc ml-6">
                 {availableIds.map((id) => (
                   <li key={id}>
@@ -239,10 +235,7 @@ export default function Results() {
                 ))}
               </ul>
 
-              <div className="mt-3 text-xs text-slate-400">
-                Tip: open <Link to="/results" className="underline">/results</Link> to see all year-wise
-                tables, or click one of the IDs above.
-              </div>
+              
             </div>
           </div>
         </div>

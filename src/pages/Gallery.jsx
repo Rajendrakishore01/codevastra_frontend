@@ -1,6 +1,7 @@
 // src/pages/Gallery.jsx
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 /**
  * galleryData: keys = event ids, values = array of filenames placed under public/gallery/
@@ -54,80 +55,84 @@ export default function Gallery() {
   };
 
   return (
-    <div className="py-10">
-      <div className="mb-4 flex items-center justify-between">
-        <Link to="/events" className="text-sm text-orange-600 hover:underline">
-          ← Back to Events
-        </Link>
-        <h2 className="text-2xl font-bold">{id}</h2>
-      </div>
-
-      <p className="text-sm text-slate-600 mb-6">Photos from the event.</p>
-
-      {photos.length === 0 ? (
-        <div className="p-6 rounded-lg bg-slate-50 border border-slate-200 text-slate-600">
-          No photos available for this event yet.
+    <div className="min-h-screen flex flex-col bg-[#fffdf6]">
+      {/* MAIN - flex-grow pushes footer down */}
+      <main className="flex-grow max-w-6xl mx-auto px-4 py-10 w-full">
+        <div className="mb-4 flex items-center justify-between">
+          <Link to="/events" className="text-sm text-orange-600 hover:underline">
+            ← Back to Events
+          </Link>
+          <h2 className="text-2xl font-bold">{id}</h2>
         </div>
-      ) : (
-        <>
-          {/* Main grid */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {photos.map((img) => (
-              <img
-                key={img}
-                src={img}
-                alt={img}
-                onError={handleImgError}
-                className="w-full h-56 object-cover rounded-lg shadow-md cursor-pointer"
-                onClick={() => openPreview(img)}
-              />
-            ))}
-          </div>
 
-          {/* Filmstrip thumbnails */}
-          <div className="mt-6">
-            <h3 className="text-sm font-semibold mb-2">More photos</h3>
-            <div className="flex gap-3 overflow-x-auto pb-2">
+        <p className="text-sm text-slate-600 mb-6">Photos from the event.</p>
+
+        {photos.length === 0 ? (
+          <div className="p-6 rounded-lg bg-slate-50 border border-slate-200 text-slate-600">
+            No photos available for this event yet.
+          </div>
+        ) : (
+          <>
+            {/* Main grid */}
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {photos.map((img) => (
                 <img
-                  key={img + "-thumb"}
+                  key={img}
                   src={img}
                   alt={img}
                   onError={handleImgError}
-                  className="w-32 h-20 object-cover rounded-md shadow-sm cursor-pointer"
+                  className="w-full h-56 object-cover rounded-lg shadow-md cursor-pointer"
                   onClick={() => openPreview(img)}
                 />
               ))}
             </div>
-          </div>
-        </>
-      )}
 
-      {/* Preview modal */}
-      {preview && (
-        <div
-          // Only close when user clicks the backdrop itself
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setPreview(null);
-            }
-          }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-        >
-          <img
-            src={preview}
-            alt="preview"
-            onError={(e) => {
-              console.warn("Preview failed to load:", preview);
-              e.currentTarget.src = PLACEHOLDER;
+            {/* Filmstrip thumbnails */}
+            <div className="mt-6">
+              <h3 className="text-sm font-semibold mb-2">More photos</h3>
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {photos.map((img) => (
+                  <img
+                    key={img + "-thumb"}
+                    src={img}
+                    alt={img}
+                    onError={handleImgError}
+                    className="w-32 h-20 object-cover rounded-md shadow-sm cursor-pointer"
+                    onClick={() => openPreview(img)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Preview modal */}
+        {preview && (
+          <div
+            // Only close when user clicks the backdrop itself
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setPreview(null);
+              }
             }}
-            // Prevent click on image from bubbling to the backdrop (so it doesn't close)
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-[95%] max-h-[95%] rounded-lg shadow-xl object-contain"
-          />
-        </div>
-      )}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          >
+            <img
+              src={preview}
+              alt="preview"
+              onError={(e) => {
+                console.warn("Preview failed to load:", preview);
+                e.currentTarget.src = PLACEHOLDER;
+              }}
+              // Prevent click on image from bubbling to the backdrop (so it doesn't close)
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-[95%] max-h-[95%] rounded-lg shadow-xl object-contain"
+            />
+          </div>
+        )}
+      </main>
+
+
     </div>
   );
 }
-
