@@ -1,9 +1,5 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import Footer from "../components/Footer";
-
-
 
 const selectedData = {
   "codewars-stage2": {
@@ -114,6 +110,24 @@ export default function SelectedStudents() {
     return merged;
   })();
 
+  // Mobile row card used when screen is small
+  const MobileRow = ({ index, student }) => (
+    <div className="p-3 border-b border-slate-200 flex items-start justify-between gap-3">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="text-sm font-medium w-6 flex-shrink-0">{index + 1}</div>
+        <div className="min-w-0">
+          <div className="truncate font-medium text-slate-900">{student.name}</div>
+          <div className="text-xs text-slate-500 truncate">{student.year}</div>
+        </div>
+      </div>
+      <div className="flex-shrink-0">
+        <span className="inline-block text-xs px-2 py-1 rounded-full border border-slate-200 text-slate-700 whitespace-nowrap">
+          {student.year}
+        </span>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-[#fffdf6]">
       <main className="flex-grow max-w-6xl mx-auto px-4 py-10 w-full">
@@ -165,7 +179,7 @@ export default function SelectedStudents() {
               </div>
             </div>
 
-            {/* GROUP TABLES - consistent wrapper + table styles */}
+            {/* GROUP LISTS */}
             {Object.entries(record.groups || {}).map(([groupName, students]) => {
               const list = Array.isArray(students) ? students : [];
               return (
@@ -176,8 +190,8 @@ export default function SelectedStudents() {
                     <div className="text-sm text-slate-500">{list.length} members</div>
                   </div>
 
-                  {/* table: table-fixed + border-collapse ensures uniform borders */}
-                  <div className="overflow-x-auto">
+                  {/* TABLE for md and up */}
+                  <div className="overflow-x-auto hidden md:block">
                     <table className="w-full table-fixed border-collapse">
                       <thead className="bg-white text-sm">
                         <tr>
@@ -198,13 +212,19 @@ export default function SelectedStudents() {
                       </tbody>
                     </table>
                   </div>
+
+                  {/* MOBILE: stacked rows */}
+                  <div className="md:hidden">
+                    {list.map((s, i) => (
+                      <MobileRow key={i} index={i} student={s} />
+                    ))}
+                  </div>
                 </section>
               );
             })}
           </div>
         )}
       </main>
-
     </div>
   );
 }
