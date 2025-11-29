@@ -8,6 +8,7 @@ import Gallery from "./pages/Gallery";
 import Results from "./pages/Results";
 import Footer from "./components/Footer";
 import SelectedStudents from "./pages/SelectedStudents";
+import Certificate from "./pages/Certificate";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/gallery/:id" element={<Gallery />} />
           <Route path="/selected/:eventId" element={<SelectedStudents />} />
 <Route path="/selected" element={<SelectedStudents />} />
+<Route path="/certificate" element={<Certificate />} />
         </Routes>
       </div>
       <Footer />
