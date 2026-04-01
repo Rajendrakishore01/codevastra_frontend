@@ -12,7 +12,7 @@ export default function Events() {
       id: "codewars-stage2",
       name: "CodeWars — Stage 2: Coding Round",
       desc: "Coding round focused on core C programming & web dev for shortlisted students.",
-      date: "24-Feb-2026",
+      date: "03-April-2026",
       level: "Medium",
       poster: "/posters/codewars-basic-c.jpg",
       registrationOpen: false,
