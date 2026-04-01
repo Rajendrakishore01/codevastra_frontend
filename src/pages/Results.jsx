@@ -251,106 +251,131 @@ export default function Results() {
     }
     return ev.event || ev.id || "";
   };
+const downloadCertificate = (match) => {
+  const nameText = match.student.name;
+  const ev = match.event;
 
-  const downloadCertificate = (match) => {
-    const nameText = match.student.name;
-    const ev = match.event;
-    const displayEvent = getDisplayEventName(ev);
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
-    const canvas = document.createElement("canvas");
-    const W = 1600;
-    const H = 1100;
-    canvas.width = W;
-    canvas.height = H;
-    const ctx = canvas.getContext("2d");
+  const W = 1600;
+  const H = 1100;
+  canvas.width = W;
+  canvas.height = H;
 
-    // background
-    const grad = ctx.createLinearGradient(0, 0, W, H);
-    grad.addColorStop(0, "#fffaf0");
-    grad.addColorStop(1, "#fffefc");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
+  // ===== BACKGROUND =====
+  ctx.fillStyle = "#fffdf7";
+  ctx.fillRect(0, 0, W, H);
 
-    // border
-    ctx.strokeStyle = "#f1f1f1";
-    ctx.lineWidth = 12;
-    roundRect(ctx, 20, 20, W - 40, H - 40, 24, false, true);
+  // ===== BORDER =====
+  ctx.strokeStyle = "#d4af37";
+  ctx.lineWidth = 14;
+  ctx.strokeRect(30, 30, W - 60, H - 60);
 
-    // header: club name
-    ctx.fillStyle = "#f36100";
-    ctx.font = "bold 58px Inter, sans-serif";
-    ctx.textAlign = "left";
-    ctx.fillText("CodeVastra", 100, 140);
+  ctx.strokeStyle = "#000";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(50, 50, W - 100, H - 100);
 
-    // title
-    ctx.fillStyle = "#0f172a";
-    ctx.font = "bold 42px Inter, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Certificate of Participation", W / 2, 300);
+  // ===== LOAD IMAGES =====
+  const iimtLogo = new Image();
+  const clubLogo = new Image();
+  const sign = new Image();
 
-    // participant name
-    ctx.fillStyle = "#0f172a";
-    ctx.font = "bold 52px Inter, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(nameText, W / 2, 420);
+  iimtLogo.src = "/iimt-logo.png";       
+  clubLogo.src = "/codevastra-logo.png"; 
+  sign.src = "/saurabh-sign.png";       
 
-    // event text
-    ctx.fillStyle = "#475569";
-    ctx.font = "20px Inter, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(`has participated in`, W / 2, 470);
+  iimtLogo.onload = () => {
+    clubLogo.onload = () => {
+      sign.onload = () => {
 
-    ctx.fillStyle = "#0f172a";
-    ctx.font = "bold 26px Inter, sans-serif";
-    ctx.fillText(displayEvent, W / 2, 520);
+        // ===== LOGOS =====
+        ctx.drawImage(iimtLogo, 100, 80, 120, 120);
+        ctx.drawImage(clubLogo, W - 220, 80, 120, 120);
 
-    // footer left: year & event
-    ctx.textAlign = "left";
-    ctx.font = "19px Inter, sans-serif";
-    ctx.fillStyle = "#475569";
-    ctx.fillText(`Year: ${certYear || ev.date || "-"}`, 100, 820);
-    ctx.fillText(`Event: ${displayEvent}`, 100, 850);
+        // ===== HEADER =====
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 50px Georgia";
+        ctx.fillText("IIMT Engineering College", W / 2, 130);
 
-    // coordinator signature and name 
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#0f172a";
-    ctx.fillText("Coding club Coordinator", W - 300, 800);
-    ctx.fillText("Saurabh Gupta", W - 300, 840);
-    ctx.font = "15px Inter, sans-serif";
-    ctx.fillStyle = "#94a3b8";
-    ctx.fillText("CodeVastra · IIMT Engineering College", W / 2, H - 60);
+        ctx.font = "22px Georgia";
+        ctx.fillStyle = "#555";
+        ctx.fillText("Meerut, Uttar Pradesh, India", W / 2, 170);
 
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${nameText.replace(/\s+/g, "_")}_certificate.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }, "image/png");
+        // ===== TITLE =====
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 60px Georgia";
+        ctx.fillText("Certificate", W / 2, 300);
+
+        ctx.font = "28px Georgia";
+        ctx.fillText("of Participation", W / 2, 340);
+
+        // ===== LINE =====
+        ctx.beginPath();
+        ctx.moveTo(350, 370);
+        ctx.lineTo(W - 350, 370);
+        ctx.strokeStyle = "#d4af37";
+        ctx.stroke();
+
+        // ===== BODY =====
+        ctx.fillStyle = "#444";
+        ctx.font = "24px Georgia";
+        ctx.fillText("This is to certify that", W / 2, 450);
+
+        // ===== NAME =====
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 70px Georgia";
+        ctx.fillText(nameText, W / 2, 540);
+
+        // ===== EVENT =====
+        ctx.fillStyle = "#444";
+        ctx.font = "24px Georgia";
+        ctx.fillText("has successfully participated in", W / 2, 600);
+
+        ctx.fillStyle = "#b45309";
+        ctx.font = "bold 30px Georgia";
+        ctx.fillText("CodeWars Coding Competition", W / 2, 650);
+
+      ctx.font = "20px Georgia";
+  ctx.fillStyle = "#000";
+
+  ctx.textAlign = "left";
+  ctx.fillText(`Year: ${ev.date}`, 120, 780);
+
+  ctx.textAlign = "right";
+  ctx.fillText(`Date:18 Nov 2025`, W - 120, 780);
+
+        // ===== SIGNATURE =====
+        ctx.textAlign = "center";
+
+        // signature image
+        ctx.drawImage(sign, 300, 830, 180, 80);
+
+        ctx.beginPath();
+        ctx.moveTo(300, 900);
+        ctx.lineTo(500, 900);
+        ctx.stroke();
+
+        ctx.fillText("Saurabh Gupta", 400, 940);
+        ctx.fillText("Faculty Coordinator", 400, 970);
+
+        
+
+        // ===== DOWNLOAD =====
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${nameText.replace(/\s+/g, "_")}_certificate.png`;
+          a.click();
+          URL.revokeObjectURL(url);
+        });
+      };
+    };
   };
-
-  const roundRect = (ctx, x, y, w, h, r, fill, stroke) => {
-    if (typeof r === "undefined") r = 5;
-    if (typeof r === "number") r = { tl: r, tr: r, br: r, bl: r };
-    ctx.beginPath();
-    ctx.moveTo(x + r.tl, y);
-    ctx.lineTo(x + w - r.tr, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
-    ctx.lineTo(x + w, y + h - r.br);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
-    ctx.lineTo(x + r.bl, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
-    ctx.lineTo(x, y + r.tl);
-    ctx.quadraticCurveTo(x, y, x + r.tl, y);
-    ctx.closePath();
-    if (fill) ctx.fill();
-    if (stroke) ctx.stroke();
-  };
-
+};
+ 
   // ----------------- rendering -----------------
   if (eventId) {
     if (events.length === 0) {

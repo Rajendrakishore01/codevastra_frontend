@@ -12,7 +12,7 @@ export default function Events() {
       id: "codewars-stage2",
       name: "CodeWars — Stage 2: Coding Round",
       desc: "Coding round focused on core C programming & web dev for shortlisted students.",
-      date: "Announced soon",
+      date: "24-Feb-2026",
       level: "Medium",
       poster: "/posters/codewars-basic-c.jpg",
       registrationOpen: false,
@@ -81,7 +81,7 @@ export default function Events() {
                       : "bg-slate-100 text-slate-500 cursor-not-allowed"
                   }`}
                 >
-                  {event.registrationOpen ? "Register" : "Registration closed"}
+                  
                 </button>
 
                  <Link
@@ -145,16 +145,14 @@ export default function Events() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-xl font-bold text-orange-700">
-                Upcoming: Stage 2
+                Upcoming:  Code wars Stage 2
               </h3>
               <p className="text-sm text-slate-600">
-                Coding Round for shortlisted participants.
+                Coding Round for shortlisted participants from stage 1.
               </p>
             </div>
 
-            <div className="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-semibold">
-              Registration Closed
-            </div>
+            
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
