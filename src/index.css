@@ -1,1 +1,102 @@
 @import "tailwindcss";
+
+/*  ROOT COLORS (Clean + Professional) */
+:root {
+  --primary: #f36100;        /* orange brand */
+  --secondary: #000000;
+  --bg: #f8f7f7;             /* white bg */
+  --card: #ffffff;
+  --text: #111111;
+  --border: #e5e7eb;
+}
+
+/*  GLOBAL BODY */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* 📦 CARDS (clean + visible) */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(241, 110, 2, 0.299);
+}
+
+/* 🔘 BUTTONS */
+.btn {
+  background: var(--primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn:hover {
+  background: #d94e00;
+  transform: scale(1.03);
+}
+
+/* 🧭 NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.nav-link {
+  color: #111;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+/* 🖱️ CURSOR (optional simple) */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* 📝 TEXT FIXES */
+p {
+  color: #333;
+}
+
+h1, h2, h3, h4 {
+  color: #111;
+}
+
+/* 🧾 RESULT PAGE IMPORTANT FIX */
+.result-card {
+  background: #ffffff;
+  color: #111;
+  border: 1px solid var(--border);
+}

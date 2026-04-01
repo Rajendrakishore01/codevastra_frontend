@@ -9,12 +9,14 @@ export default function Team() {
 
         <div className="grid sm:grid-cols-3 gap-8">
           <Card title="President" name="Tanuj Pratap Singh" />
+          <Card title="Event Manager" name="Rajendra kishore" />
           <Card title="Vice President" name="Vansh Malik" />
-          <Card
-            title="Members"
-            name="Rajendra Kishore, Khushi Singh, Samarth, Pradeep, Pravesh, Sneha, Khushi, Kumkum, Anshi, Aman, Happy Singh, Shiv Raghav"
-          />
            <Card title="Coding club Coordinator" name="Saurabh Gupta" />
+          <Card
+            title=" All Members of coding club"
+            name="Khushi Singh, Samarth, Pradeep, Pravesh, Sneha, Khushi, Kumkum, Anshi, Aman, Happy Singh, Shiv Raghav"
+          />
+           
         </div>
       </main>
 
