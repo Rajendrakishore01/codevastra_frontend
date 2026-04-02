@@ -14,7 +14,7 @@ export default function Team() {
            <Card title="Coding club Coordinator" name="Saurabh Gupta" />
           <Card
             title=" All Members of coding club"
-            name="Khushi Singh, Samarth, Pradeep, Pravesh, Sneha, Khushi, Kumkum, Anshi, Aman, Happy Singh, Shiv Raghav"
+            name="Khushi Singh, Samarth, Pardeep Sharma, Pravesh, Sneha, Khushi, Kumkum, Anshi, Aman, Happy Singh, Shiv kumar"
           />
            
         </div>
